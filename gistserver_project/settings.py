@@ -108,13 +108,17 @@ ROOT_URLCONF = 'gistserver_project.urls'
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'gistserver_project.wsgi.application'
 
-TEMPLATE_DIRS = (
+TEMPLATE_DIRS = [
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
     project_dir('templates'),
     os.path.abspath('.'),
-)
+]
+
+ADDITIONAL_TEMPLATE_DIR = os.environ.get('ADDITIONAL_TEMPLATE_DIR', '')
+if ADDITIONAL_TEMPLATE_DIR:
+    TEMPLATE_DIRS.append(ADDITIONAL_TEMPLATE_DIR)
 
 INSTALLED_APPS = [
     # 'django.contrib.auth',
