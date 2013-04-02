@@ -7,7 +7,7 @@ if __name__ == "__main__":
     if len(sys.argv) > 1:
         port = sys.argv[-1]
     sys.path.append(os.path.abspath('.'))
-    os.environ["DJANGO_SETTINGS_MODULE"] = "example_project.settings"
+    os.environ["DJANGO_SETTINGS_MODULE"] = "gistserver_project.settings"
     from django.core.management import call_command
     call_command('runserver', addrport="0.0.0.0:%s" % port)
     # addrport

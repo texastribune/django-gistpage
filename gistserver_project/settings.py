@@ -1,4 +1,4 @@
-# Django settings for example_project project.
+# Django settings for gistserver project.
 import os
 
 import dj_database_url
@@ -103,10 +103,10 @@ MIDDLEWARE_CLASSES = (
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'example_project.urls'
+ROOT_URLCONF = 'gistserver_project.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
-WSGI_APPLICATION = 'example_project.wsgi.application'
+WSGI_APPLICATION = 'gistserver_project.wsgi.application'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
@@ -158,7 +158,7 @@ LOGGING = {
         },
         'console': {
             'level': 'DEBUG',
-            'class': 'example_project.logging_handlers.ColorizingStreamHandler',
+            'class': 'gistserver_project.logging_handlers.ColorizingStreamHandler',
         },
     },
     'loggers': {
@@ -181,16 +181,6 @@ LOGGING = {
         },
     }
 }
-
-if DEBUG:
-    TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
-
-    # extra apps used for development
-    INSTALLED_APPS += [
-        'django_extensions',
-        'django_nose',
-        'example_project.test_app',
-    ]
 
 try:
     from .local_settings import *
