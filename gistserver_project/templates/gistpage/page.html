@@ -7,10 +7,22 @@ This is just a sample base.
 
 
 {% block extra_head %}
-  <link href="app.css" rel="stylesheet" type="text/css">
+  {% if style %}
+    <style type='text/css'>
+      {{ style|safe }}
+    </style>
+  {% else %}
+    <link href="app.css" rel="stylesheet" type="text/css">
+  {% endif %}
 {% endblock %}
 
 
 {% block extra_body %}
-  <script type="text/javascript" src="app.js"></script>
+  {% if script %}
+    <script>
+      {{ script|safe }}
+    </script
+  {% else %}
+    <script type="text/javascript" src="app.js"></script>
+  {% endif %}
 {% endblock %}
