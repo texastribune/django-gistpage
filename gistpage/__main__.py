@@ -3,7 +3,9 @@ import sys
 
 
 if __name__ == "__main__":
-    port = 8000  # TODO
+    port = 8000
+    if len(sys.argv) > 1:
+        port = sys.argv[-1]
     sys.path.append(os.path.abspath('.'))
     os.environ["DJANGO_SETTINGS_MODULE"] = "example_project.settings"
     from django.core.management import call_command
