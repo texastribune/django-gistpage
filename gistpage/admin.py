@@ -7,12 +7,21 @@ from .models import GistPage
 
 
 class GistPageAdmin(admin.ModelAdmin):
-    fields = (
-        'gist_url',
-        'site_url',
-        'template',
-        'style',
-        'script',
+    fieldsets = (
+        (None, {
+            'fields': (
+                'gist_url',
+                'site_url',
+            )
+        }),
+        ('Advanced options', {
+            'classes': ('collapse', ),
+            'fields': (
+                'template',
+                'style',
+                'script',
+            )
+        })
         # 'sites',
     )
 
