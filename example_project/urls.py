@@ -7,14 +7,7 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^', include('gistpage.urls',
-        namespace='', app_name='')),
-
-    # Uncomment the admin/doc line below to enable admin documentation:
-    # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
-    # Uncomment the next line to enable the admin:
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^', include('gistpage.urls')),
 
     # Use Django to serve static media even when DEBUG=False
     url(r'^static/(?P<path>.*)$', serve, {
