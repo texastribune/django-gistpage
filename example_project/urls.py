@@ -7,7 +7,7 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^', include('gistpage.urls')),
+    url(r'^admin/', include(admin.site.urls)),
 
     # Use Django to serve static media even when DEBUG=False
     url(r'^static/(?P<path>.*)$', serve, {
