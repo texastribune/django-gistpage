@@ -129,7 +129,6 @@ INSTALLED_APPS = [
     # 'django.contrib.admindocs',
 
     'abstract_templates',
-    'gistpage',
 ]
 
 # A sample logging configuration. The only tangible logging
