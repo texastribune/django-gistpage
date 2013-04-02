@@ -8,7 +8,7 @@ setup(
     author='',
     author_email='',
     url='',
-    packages=[''],
+    packages=['DjangoGistServer'],
     include_package_data=True,  # automatically include things from MANIFEST.in
     license='Apache License, Version 2.0',
     description='',
