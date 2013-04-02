@@ -7,10 +7,34 @@ document are implemented.*
 This package provides two components:
 
 1. **DjangoGistServer**: A way to develop a simple static site that uses the
-   full Django templating engine.
+   full Django templating engine, including extending some Django project's base
+   templates.
 
 2. **GistPage**: A way to take a page developed using DjangoGistServer that's
-   been published as a GitHub gist and serve it at a url.
+   been published as a GitHub gist and serve it at a url in some Django project.
+
+Your static page should be in a directory that looks like this::
+
+    index.html
+    app.css
+    app.js
+
+If you use a template base that supports DjangoGistServer, you don't have to
+worry about including css and js. If your base doesn't support DjangoGistServer,
+add these two lines somewhere inside index.html::
+
+    <link href="app.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="app.js"></script>
+
+**Magic Warning:** If you have multiple css and js files, they will be
+concatenated into app.css and app.js. You may have guessed at this point that it
+doesn't matter what your files are named. TODO add docs on how to deal with
+including third-party JS/CSS.
+
+Static pages are published as gists. Which are great because you get history and
+can package multiple files together. A sample gist is available at:
+
+    https://gist.github.com/crccheck/93a8a020f6789d373a6c
 
 DjangoGistServer
 ----------------
