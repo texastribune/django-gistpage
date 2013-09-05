@@ -103,7 +103,7 @@ MIDDLEWARE_CLASSES = (
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'gistserver_project.urls'
+ROOT_URLCONF = __name__
 
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'gistserver_project.wsgi.application'
@@ -184,6 +184,24 @@ LOGGING = {
         },
     }
 }
+
+# TODO clean up this file
+from django.conf.urls import patterns, url
+from django.views.static import serve
+
+from . import views
+
+
+urlpatterns = patterns('',
+    url(r'^$', views.Page.as_view()),
+    url(r'^app.css$', views.Glob.as_view(pattern="*.css")),
+    url(r'^app.js$', views.Glob.as_view(pattern="*.js")),
+
+    # Use Django to serve static media even when DEBUG=False
+    url(r'^static/(?P<path>.*)$', serve, {
+        'document_root': STATIC_ROOT,
+    }),
+)
 
 try:
     from .local_settings import *
