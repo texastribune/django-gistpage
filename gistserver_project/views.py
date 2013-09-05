@@ -22,6 +22,6 @@ class Glob(View):
                     yield f.read()
         files = iglob(self.pattern)
         return HttpResponse(reduce(concat, contents(files)),
-            content_type=mimetypes.guess_type(self.pattern),
+            content_type=mimetypes.guess_type(self.pattern)[0],
             # content_type='text/plain',
         )
