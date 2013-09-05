@@ -79,12 +79,13 @@ INSTALLED_APPS = [
 
 # TODO clean up this file
 from django.conf.urls import patterns, url
+from django.views.generic import TemplateView
 from django.views.static import serve
-
 from . import views
 
+
 urlpatterns = patterns('',
-    url(r'^$', views.Page.as_view()),
+    url(r'^$', TemplateView.as_view(template_name='index.html')),
     url(r'^app.css$', views.Glob.as_view(pattern="*.css")),
     url(r'^app.js$', views.Glob.as_view(pattern="*.js")),
 

@@ -3,14 +3,16 @@ from operator import concat
 import mimetypes
 
 from django.http import HttpResponse
-from django.views.generic import TemplateView, View
-
-
-class Page(TemplateView):
-    template_name = "index.html"
+from django.views.generic import View
 
 
 class Glob(View):
+    """
+    Concats and serves all files found by globbing `self.pattern`.
+
+    TODO raise helpful error if no `pattern`.
+    WISHLIST handle large numbers of large files better?
+    """
     pattern = None  # make sure to pass this into your as_view()
 
     def get(self, request, **kwargs):
