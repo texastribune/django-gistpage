@@ -6,7 +6,19 @@
   <link href="app.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-  Hello
+  <section>
+    <h1>Hello</h1>
+    <p>Would you like to see me count to a hundred?</p>
+    <ol>
+      {% for __ in "1234567890" %}
+        {% for __ in "1234567890" %}
+          <li>
+            {{ forloop.counter0 }}
+          </li>
+        {% endfor %}
+      {% endfor %}
+    </ol>
+  </section>
   <script type="text/javascript" src="app.js"></script>
 </body>
 </html>
