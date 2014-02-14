@@ -20,7 +20,7 @@ if __name__ == "__main__":
         os.environ['ADDITIONAL_TEMPLATE_DIR'] = options.template_dir
 
     sys.path.append(os.path.abspath('.'))
-    os.environ["DJANGO_SETTINGS_MODULE"] = "DjangoGistServer.gistserver_project.settings"
+    os.environ["DJANGO_SETTINGS_MODULE"] = "DjangoGistServer.settings"
     from django.core.management import call_command
     call_command('runserver', addrport="0.0.0.0:%s" % port)
     # addrport
