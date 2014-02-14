@@ -1,33 +1,27 @@
-from django.conf import settings
-from django.core.xheaders import populate_xheaders
-from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import get_object_or_404
-from django.template import RequestContext, Template
-from django.views.decorators.csrf import csrf_protect
+from glob import iglob
+from operator import concat
+import mimetypes
 
-from .models import GistPage
+from django.http import HttpResponse
+from django.views.generic import View
 
 
-# This view is called from GistpageFallbackMiddleware.process_response
-# when a 404 is raised, which often means CsrfViewMiddleware.process_view
-# has not been called even if CsrfViewMiddleware is installed. So we need
-# to use @csrf_protect, in case the template needs {% csrf_token %}.
-@csrf_protect
-def gistpage(request, url):
-    if not url.endswith('/') and settings.APPEND_SLASH:
-        return HttpResponseRedirect("%s/" % request.path)
-    if not url.startswith('/'):
-        url = "/" + url
-    print "hi", url
-    page = get_object_or_404(GistPage, site_url__exact=url,
-        # sites__id__exact=settings.SITE_ID
-    )
+class Glob(View):
+    """
+    Concats and serves all files found by globbing `self.pattern`.
 
-    t = Template(page.template)
-    c = RequestContext(request, dict(
-        style=page.style,
-        script=page.script,
-    ))
-    response = HttpResponse(t.render(c))
-    populate_xheaders(request, response, GistPage, page.pk)
-    return response
+    TODO raise helpful error if no `pattern`.
+    WISHLIST handle large numbers of large files better?
+    """
+    pattern = None  # make sure to pass this into your as_view()
+
+    def get(self, request, **kwargs):
+        def contents(filename_list):
+            for filename in filename_list:
+                with open(filename, "r") as f:
+                    yield f.read()
+        files = iglob(self.pattern)
+        return HttpResponse(reduce(concat, contents(files)),
+            content_type=mimetypes.guess_type(self.pattern)[0],
+            # content_type='text/plain',
+        )

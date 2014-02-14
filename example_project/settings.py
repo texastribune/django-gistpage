@@ -2,7 +2,7 @@
 import os
 
 import dj_database_url
-
+from project_runpy import env
 
 def project_dir(*paths):
     base = os.path.realpath(os.path.dirname(__file__))
@@ -10,7 +10,7 @@ def project_dir(*paths):
 
 
 # default to DEBUG=True
-DEBUG = os.environ.get('ENVIRONMENT', 'DEV') == 'DEV'
+DEBUG = env.get('DEBUG', False)
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -102,7 +102,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'gistpage.middleware.GistpageFallbackMiddleware',
+    'DjangoGistServer.middleware.GistpageFallbackMiddleware',
 )
 
 ROOT_URLCONF = 'example_project.urls'
@@ -114,8 +114,6 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    project_dir('templates'),
-    project_dir('../gistserver_project/templates'),
 )
 
 INSTALLED_APPS = [
@@ -160,7 +158,7 @@ LOGGING = {
         },
         'console': {
             'level': 'DEBUG',
-            'class': 'example_project.logging_handlers.ColorizingStreamHandler',
+            'class': 'project_runpy.ColorizingStreamHandler',
         },
     },
     'loggers': {
@@ -193,8 +191,3 @@ if DEBUG:
         'django_nose',
         'example_project.test_app',
     ]
-
-try:
-    from .local_settings import *
-except ImportError:
-    pass
