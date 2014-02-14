@@ -115,7 +115,7 @@ TEMPLATE_DIRS = (
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
     project_dir('templates'),
-    project_dir('../gistserver_project/templates'),
+    project_dir('../DjangoGistServer/gistserver_project/templates'),
 )
 
 INSTALLED_APPS = [
