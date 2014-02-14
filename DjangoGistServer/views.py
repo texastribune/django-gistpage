@@ -1,5 +1,5 @@
 from django.conf import settings
-from django.core.xheaders import populate_xheaders
+# from django.core.xheaders import populate_xheaders
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.template import RequestContext, Template
@@ -29,5 +29,5 @@ def gistpage(request, url):
         script=page.script,
     ))
     response = HttpResponse(t.render(c))
-    populate_xheaders(request, response, GistPage, page.pk)
+    # populate_xheaders(request, response, GistPage, page.pk)
     return response
