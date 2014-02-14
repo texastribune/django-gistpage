@@ -2,7 +2,7 @@
 import os
 
 import dj_database_url
-
+from project_runpy import env
 
 def project_dir(*paths):
     base = os.path.realpath(os.path.dirname(__file__))
@@ -10,7 +10,7 @@ def project_dir(*paths):
 
 
 # default to DEBUG=True
-DEBUG = os.environ.get('ENVIRONMENT', 'DEV') == 'DEV'
+DEBUG = env.get('DEBUG', False)
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -160,7 +160,7 @@ LOGGING = {
         },
         'console': {
             'level': 'DEBUG',
-            'class': 'example_project.logging_handlers.ColorizingStreamHandler',
+            'class': 'project_runpy.ColorizingStreamHandler',
         },
     },
     'loggers': {
